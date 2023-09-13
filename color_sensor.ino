@@ -3,17 +3,6 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-/* Example code for the Adafruit TCS34725 breakout library */
-
-/* Connect SCL    to analog 5
-   Connect SDA    to analog 4
-   Connect VDD    to 3.3V DC
-   Connect GROUND to common ground */
-
-/* Initialise with default values (int time = 2.4ms, gain = 1x) */
-// Adafruit_TCS34725 tcs = Adafruit_TCS34725();
-
-/* Initialise with specific int time and gain values */
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 
 #define OLED_RESET 1
@@ -29,17 +18,14 @@ void setup(void) {
     while (1);
   }
   
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // try 0x3D also if OLED is not working
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
-
-  // Now we're ready to get readings!
 }
 
 void loop(void) {
   uint16_t r, g, b, c, colorTemp, lux;
 
   tcs.getRawData(&r, &g, &b, &c);
-  // colorTemp = tcs.calculateColorTemperature(r, g, b);
   colorTemp = tcs.calculateColorTemperature_dn40(r, g, b, c);
   lux = tcs.calculateLux(r, g, b);
   
