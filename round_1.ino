@@ -3,7 +3,6 @@
 #define ENA 6
 #define ENB 5
 
-//int ir[4]={12,13,9,14};
 int ir[6]={13,16,11,12,14,9}; // S6 S5 S4 S3 S8 S1
 
 #define IN3 4
@@ -11,7 +10,6 @@ int ir[6]={13,16,11,12,14,9}; // S6 S5 S4 S3 S8 S1
 
 void setup() 
 {
-  
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
   pinMode(IN3,OUTPUT);
@@ -46,7 +44,6 @@ void right()
   analogWrite(ENA,160); //Right
   analogWrite(ENB,0);//Left
 }
-
 
 void left()
 {
@@ -93,6 +90,7 @@ int ir_val[6];
 void loop()
 {
   int decision ;
+  
   for(int i=0;i<=5;i++)
   {
     ir_val[i]=digitalRead(ir[i]);
@@ -104,48 +102,24 @@ void loop()
     {
         ir_val[i]=digitalRead(ir[i]);
     }
+    
     if(ir_val[1]==1 && ir_val[3] ==1 && ir_val[2]==1)
     {
       left();
       delay(80);
-//      pause();                                                                           
     }
-     else if(ir_val[1]==1)
+      
+    else if(ir_val[1]==1)
     {
       left();
       delay(20);
       pause();
     }
-    
-    
+ 
     else if(ir_val[1]==0 )
-
     {
       right();
       delay(20);
-//      pause();                                                                           
-    }
-       
-    
+    } 
   }
-//  for(int i=0;i<=4;i++){
-//        ir_val[i]=digitalRead(ir[i]);
-//        }
-//  if(ir_val[0]==1)decision=0;
-//  else if(ir_val[4]==1)decision=1;
-    
-
-//  if (decision==0){ left_turn();delay(501);}
-//  else if (decision==1) right_turn();delay(501);
-//  pause();
-//  delay(3000);
-  
-  
-  
-//  if(ir_val[1]==0 && ir_val[3]==0)straight();
-//  else if (ir_val[1]==1 && ir_val[3] ==0)left();
-//  else if (ir_val[1]==0&& ir_val[3] ==1)right();
-//  else if (ir_val[0]==1 || ir_val[4]==1)pause();
-
-  
 }
